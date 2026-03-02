@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="Images/carwashicon.png" type="image/png">
+<title>Car Wash - Client</title>
+
+<style>
+/* ================= Theme (improved: minimal + premium) ================= */
+:root{
+  --bg1:#0b1220;
+  --bg2:#111d33;
+
+  --panel: rgba(255,255,255,0.05);
+  --border: rgba(255,255,255,0.10);
+
+  --text: #f1f5f9;
+  --muted:#94a3b8;
+
+  --accent1:#22d3ee;
+  --accent2:#14b8a6;
+
+  --shadow: 0 18px 60px rgba(0,0,0,0.45);
+  --shadow2: 0 8px 28px rgba(0,0,0,0.30);
+
+  --radius: 16px;
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+body{
+  font-family: 'Poppins', Arial, sans-serif;
+  line-height: 1.55;
+  color: var(--text);
+  background: radial-gradient(900px 500px at 10% 10%, rgba(34,211,238,0.12), transparent 55%),
+              radial-gradient(900px 500px at 90% 40%, rgba(20,184,166,0.10), transparent 55%),
+              linear-gradient(135deg, var(--bg1), var(--bg2));
+}
+
+/* ===== Header ===== */
+header{
+  backdrop-filter: blur(12px);
+  background: rgba(15, 23, 42, 0.75);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 14px 26px;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  position: sticky;
+  top:0;
+  z-index: 1000;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: 0.4px;
+}
+.logo img{ width:34px; height:34px; }
+.logo span{
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ✅ Back button (to login.html) */
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+.back-link{
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  text-decoration:none;
+  color: #e2e8f0;
+  font-weight: 900;
+  font-size: 13px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  transition: all .2s ease;
+}
+.back-link:hover{
+  background: rgba(34,211,238,0.10);
+  border-color: rgba(34,211,238,0.32);
+  transform: translateY(-1px);
+}
+.back-link:active{ transform: translateY(0); }
+
+/* ===== Layout / Center ===== */
+.container{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 18px 56px;
+
+  min-height: calc(100vh - 70px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  gap: 18px; /* stepper -> content spacing */
+}
+
+/* Panels */
+.panel{
+  width: min(980px, 100%);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow2);
+  backdrop-filter: blur(10px);
+}
+
+/* Stepper wrapper panel (a bit more solid) */
+.panel.stepper-panel{
+  background: rgba(255,255,255,0.04);
+}
+
+/* Active content panel gets a subtle focus ring */
+.panel.content-panel{
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(255,255,255,0.10);
+  position: relative;
+  overflow: hidden;
+}
+.panel.content-panel::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background: radial-gradient(600px 260px at 15% 0%, rgba(34,211,238,0.12), transparent 60%),
+              radial-gradient(600px 260px at 85% 0%, rgba(20,184,166,0.10), transparent 60%);
+  pointer-events:none;
+}
+
+/* Titles + helper */
+.panel-body{
+  padding: 22px;
+  position: relative;
+  z-index: 1;
+}
+.panel-title{
+  font-size: 22px;
+  margin: 0 0 6px;
+  color: var(--accent1);
+  font-weight: 800;
+}
+.helper{
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ===== Stepper ===== */
+.stepper{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 22px;
+  padding: 18px 18px 14px;
+}
+.step{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap: 10px;
+  min-width: 180px;
+}
+.bubble{
+  width: 62px;
+  height: 62px;
+  border-radius: 999px;
+  display:grid;
+  place-items:center;
+  font-weight: 900;
+  font-size: 20px;
+  color: #0b1220;
+  background: rgba(255,255,255,0.14);
+  border: 2px solid rgba(255,255,255,0.14);
+  transition: all .25s ease;
+}
+.step label{
+  font-size: 14px;
+  color: #e2e8f0;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+.step.active .bubble{
+  background: linear-gradient(180deg, rgba(20,184,166,0.95), rgba(15,118,110,0.95));
+  color: #fff;
+  border-color: rgba(20,184,166,0.80);
+  box-shadow: 0 0 0 6px rgba(20,184,166,0.12), 0 0 24px rgba(20,184,166,0.35);
+}
+.step.done .bubble{
+  background: rgba(20,184,166,0.85);
+  color: #fff;
+  border-color: rgba(34,211,238,0.65);
+}
+.step-line{
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.10);
+  margin-top: -26px;
+  transition: all .25s ease;
+}
+.step-line.active{
+  background: linear-gradient(90deg, var(--accent2), var(--accent1));
+}
+
+/* ===== Fields ===== */
+.field{ margin-bottom: 14px; }
+.field label{
+  display:flex;
+  align-items:center;
+  gap: 6px;
+  font-weight: 800;
+  color:#e2e8f0;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+.req{ color:#ef4444; }
+.field input, .field select{
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(15, 23, 42, 0.55);
+  color: #e2e8f0;
+  outline:none;
+  font-size: 15px;
+  transition: box-shadow .2s ease, border-color .2s ease, transform .2s ease;
+}
+.field input::placeholder{ color: rgba(226,232,240,0.50); }
+.field input:focus, .field select:focus{
+  border-color: rgba(34,211,238,0.75);
+  box-shadow: 0 0 0 3px rgba(34,211,238,0.16);
+}
+.micro{
+  margin-top: 6px;
+  font-size: 12px;
+  color: rgba(148,163,184,0.95);
+}
+
+/* ===== Buttons ===== */
+.primary-btn{
+  width:100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  cursor:pointer;
+  font-size: 15px;
+  font-weight: 900;
+  color:#07201d;
+  background: linear-gradient(90deg, rgba(20,184,166,0.95), rgba(34,211,238,0.95));
+  box-shadow: 0 10px 30px rgba(20,184,166,0.18);
+  transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+}
+.primary-btn:hover{
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 38px rgba(20,184,166,0.22);
+}
+.primary-btn:active{ transform: translateY(0); }
+.primary-btn:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+  filter: none;
+  transform: none;
+  box-shadow: none;
+}
+
+.row-actions{
+  display:flex;
+  gap: 12px;
+  margin-top: 14px;
+}
+.secondary-btn{
+  flex:1;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.06);
+  color:#e2e8f0;
+  font-weight: 900;
+  cursor:pointer;
+  transition: all .2s ease;
+}
+.secondary-btn:hover{
+  background: rgba(34,211,238,0.10);
+  border-color: rgba(34,211,238,0.35);
+}
+
+/* ===== Table ===== */
+.table{
+  width:100%;
+  border-collapse: collapse;
+  background: rgba(15, 23, 42, 0.55);
+  border-radius: 14px;
+  overflow:hidden;
+  border: 1px solid rgba(255,255,255,0.10);
+}
+.table th, .table td{
+  text-align:left;
+  padding: 14px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.table th{
+  background: rgba(34, 211, 238, 0.12);
+  font-weight: 800;
+  color: #e2e8f0;
+  font-size: 13px;
+}
+
+/* Pills */
+.status-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.status-pill .mini-dot{ width:9px; height:9px; border-radius:999px; }
+.status-pill.available{ background: rgba(34,197,94,0.16); color: #bbf7d0; }
+.status-pill.available .mini-dot{ background:#22c55e; }
+.status-pill.occupied{ background: rgba(239,68,68,0.16); color: #fecaca; }
+.status-pill.occupied .mini-dot{ background:#ef4444; }
+
+/* Pick button */
+.pick-btn{
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.06);
+  color:#e2e8f0;
+  font-weight: 900;
+  cursor:pointer;
+  transition: all .2s ease;
+}
+.pick-btn:hover{ background: rgba(34,211,238,0.10); border-color: rgba(34,211,238,0.32); }
+.pick-btn:disabled{ opacity:.45; cursor:not-allowed; }
+
+/* Badge */
+.badge{
+  display:inline-block;
+  margin-left: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(20,184,166,0.10);
+  border: 1px solid rgba(20,184,166,0.30);
+  color:#5eead4;
+  font-weight: 900;
+  font-size: 12px;
+}
+
+/* Services */
+.services-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 14px;
+}
+.service-card{
+  background: rgba(34, 211, 238, 0.05);
+  border: 1px solid rgba(34, 211, 238, 0.18);
+  border-radius: 14px;
+  padding: 16px;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 14px;
+  transition: transform .15s ease, border-color .15s ease;
+}
+.service-card:hover{
+  transform: translateY(-1px);
+  border-color: rgba(34,211,238,0.32);
+}
+.service-info h3{ font-size: 15px; color:#e2e8f0; margin-bottom:6px; font-weight: 900; }
+.service-info .price{ font-size: 20px; font-weight: 900; color: var(--accent1); }
+
+/* Switch */
+.switch{ position: relative; display:inline-block; width:54px; height:30px; }
+.switch input{ display:none; }
+.slider{
+  position:absolute; cursor:pointer; inset:0;
+  background: rgba(255,255,255,0.16);
+  border: 1px solid rgba(255,255,255,0.18);
+  transition:.2s;
+  border-radius:999px;
+}
+.slider:before{
+  position:absolute; content:"";
+  height:22px; width:22px;
+  left:4px; top:50%;
+  transform: translateY(-50%);
+  background: rgba(15, 23, 42, 0.95);
+  transition:.2s;
+  border-radius:999px;
+}
+.switch input:checked + .slider{
+  background: rgba(20,184,166,0.45);
+  border-color: rgba(20,184,166,0.70);
+}
+.switch input:checked + .slider:before{ transform: translate(24px, -50%); }
+
+.note{ margin-top: 10px; color: var(--muted); font-size: 13px; }
+
+/* ===== Modal ===== */
+.modal-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.55);
+  backdrop-filter: blur(10px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+}
+.modal{
+  width: min(520px, calc(100% - 32px));
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+.modal h3{
+  margin: 0 0 10px 0;
+  font-size: 20px;
+  color: var(--accent1);
+  font-weight: 900;
+}
+.modal p{
+  margin: 0 0 14px 0;
+  color: #cbd5e1;
+  font-size: 14px;
+}
+.modal .modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap: 10px;
+}
+.modal .ok-btn{
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(34,211,238,0.28);
+  background: rgba(34,211,238,0.14);
+  color: #e2e8f0;
+  font-weight: 900;
+  cursor: pointer;
+}
+.modal .ok-btn:hover{ background: rgba(34,211,238,0.22); }
+
+@media (max-width: 768px){
+  .services-grid{ grid-template-columns: 1fr; }
+  .step{ min-width: 120px; }
+  .stepper{ gap: 16px; }
+  .bubble{ width:56px; height:56px; }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="logo">
+    <img src="Images/carwashicon.png" alt="Car Wash Icon">
+    <span>Car Wash Management</span>
+  </div>
+
+  <!-- ✅ Back to login -->
+  <div class="header-actions">
+    <a class="back-link" href="login.html" aria-label="Back to login">
+      ← Back
+    </a>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- Stepper -->
+  <div class="panel stepper-panel">
+    <div class="stepper">
+      <div class="step active" id="step1">
+        <div class="bubble">1</div>
+        <label>Customer Info</label>
+      </div>
+      <div class="step-line" id="line1"></div>
+      <div class="step" id="step2">
+        <div class="bubble">2</div>
+        <label>Select Slot</label>
+      </div>
+      <div class="step-line" id="line2"></div>
+      <div class="step" id="step3">
+        <div class="bubble">3</div>
+        <label>Select Services</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="panel content-panel" id="panelStep1">
+    <div class="panel-body">
+      <h2 class="panel-title">Customer Information</h2>
+      <p class="helper">Enter your details to view available slots and services. Takes less than 1 minute.</p>
+
+      <div class="field">
+        <label>Customer Name <span class="req">*</span></label>
+        <input id="customerName" type="text" placeholder="Enter customer name" />
+      </div>
+
+      <div class="field">
+        <label>Vehicle Plate Number <span class="req">*</span></label>
+        <input id="plateNumber" type="text" placeholder="ABC-1234" />
+        <div class="micro">Example format: ABC-1234</div>
+      </div>
+
+      <div class="field">
+        <label>Vehicle Type <span class="req">*</span></label>
+        <select id="vehicleType">
+          <option value="Sedan">Sedan</option>
+          <option value="SUV">SUV</option>
+          <option value="Hatchback">Hatchback</option>
+          <option value="Pickup">Pickup</option>
+          <option value="Van">Van</option>
+          <option value="Motorcycle">Motorcycle</option>
+        </select>
+      </div>
+
+      <button class="primary-btn" id="btnCheckAvailability">Check Availability</button>
+      <div class="micro" style="margin-top:10px;">No account needed • No payment required</div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="panel content-panel" id="panelStep2" style="display:none;">
+    <div class="panel-body">
+      <h2 class="panel-title">Select Slot <span class="badge" id="selectedSlotBadge" style="display:none;"></span></h2>
+      <p class="helper">Pick an available slot to continue.</p>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Slot ID</th>
+            <th style="width: 38%;">Location</th>
+            <th style="width: 22%;">Status</th>
+            <th style="width: 18%;">Action</th>
+          </tr>
+        </thead>
+        <tbody id="slotRows"></tbody>
+      </table>
+
+      <div class="row-actions">
+        <button class="secondary-btn" id="btnBackTo1">Back</button>
+        <button class="primary-btn" id="btnGoTo3" disabled>Next</button>
+      </div>
+
+      <div class="note">Slots shown below are based on availability.</div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="panel content-panel" id="panelStep3" style="display:none;">
+    <div class="panel-body">
+      <h2 class="panel-title">Select Services</h2>
+      <p class="helper">Choose any services you want to include.</p>
+
+      <div class="services-grid" id="servicesGrid"></div>
+
+      <div class="row-actions">
+        <button class="secondary-btn" id="btnBackTo2">Back</button>
+        <button class="primary-btn" id="btnSubmitRequest">Submit Request</button>
+      </div>
+
+      <div class="note" id="summaryNote"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal alert -->
+<div class="modal-overlay" id="waitModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="waitTitle">
+    <h3 id="waitTitle">Please wait shortly</h3>
+    <p>Your request has been received. One of our staff will assist you in a moment.</p>
+    <div class="modal-actions">
+      <button class="ok-btn" id="btnModalOk">OK</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/**
+ * ✅ Client-side demo data
+ * (Not connected to admin.html and not saved/persisted)
+ */
+const appData = {
+  slots: [
+    { slotId: "A001", location: "Ground Floor", isAvailable: false },
+    { slotId: "A002", location: "Ground Floor", isAvailable: true },
+    { slotId: "A003", location: "Ground Floor", isAvailable: false },
+    { slotId: "A004", location: "Ground Floor", isAvailable: false },
+    { slotId: "A005", location: "Ground Floor", isAvailable: false },
+    { slotId: "A006", location: "Ground Floor", isAvailable: false },
+    { slotId: "A007", location: "Ground Floor", isAvailable: false },
+    { slotId: "A008", location: "Ground Floor", isAvailable: true },
+    { slotId: "A009", location: "Ground Floor", isAvailable: false },
+    { slotId: "A010", location: "Ground Floor", isAvailable: false }
+  ],
+  services: [
+    { serviceId: 1, name: "Basic Car Wash", price: 150, isAvailable: true },
+    { serviceId: 2, name: "Premium Car Wash", price: 300, isAvailable: true },
+    { serviceId: 3, name: "Interior Cleaning", price: 200, isAvailable: true },
+    { serviceId: 4, name: "Wax & Polish", price: 400, isAvailable: true },
+    { serviceId: 5, name: "Engine Cleaning", price: 350, isAvailable: true },
+    { serviceId: 6, name: "Valet Service", price: 100, isAvailable: true },
+    { serviceId: 7, name: "Overnight Parking", price: 250, isAvailable: true },
+    { serviceId: 8, name: "Tire Cleaning", price: 120, isAvailable: true }
+  ]
+};
+
+const txState = {
+  customerName: "",
+  plateNumber: "",
+  vehicleType: "Sedan",
+  selectedSlotId: null,
+  selectedServices: new Set()
+};
+
+/* ===== Step UI ===== */
+const panel1 = document.getElementById("panelStep1");
+const panel2 = document.getElementById("panelStep2");
+const panel3 = document.getElementById("panelStep3");
+
+const step1 = document.getElementById("step1");
+const step2 = document.getElementById("step2");
+const step3 = document.getElementById("step3");
+
+const line1 = document.getElementById("line1");
+const line2 = document.getElementById("line2");
+
+function setStep(n){
+  [step1, step2, step3].forEach(s => s.classList.remove("active","done"));
+  [line1, line2].forEach(l => l.classList.remove("active"));
+
+  panel1.style.display = (n===1) ? "" : "none";
+  panel2.style.display = (n===2) ? "" : "none";
+  panel3.style.display = (n===3) ? "" : "none";
+
+  if(n===1){
+    step1.classList.add("active");
+  } else if(n===2){
+    step1.classList.add("done");
+    step2.classList.add("active");
+    line1.classList.add("active");
+  } else if(n===3){
+    step1.classList.add("done");
+    step2.classList.add("done");
+    step3.classList.add("active");
+    line1.classList.add("active");
+    line2.classList.add("active");
+  }
+}
+
+/* Validate Step 1 */
+function validateStep1(){
+  const name = document.getElementById("customerName").value.trim();
+  const plate = document.getElementById("plateNumber").value.trim();
+  const type = document.getElementById("vehicleType").value;
+
+  if(!name || !plate || !type) return false;
+
+  txState.customerName = name;
+  txState.plateNumber = plate;
+  txState.vehicleType = type;
+  return true;
+}
+
+document.getElementById("btnCheckAvailability").addEventListener("click", () => {
+  if(!validateStep1()){
+    alert("Please fill out all required fields.");
+    return;
+  }
+  renderSlots();
+  setStep(2);
+});
+
+/* STEP 2: Slots rendering */
+const slotRows = document.getElementById("slotRows");
+const btnGoTo3 = document.getElementById("btnGoTo3");
+const selectedSlotBadge = document.getElementById("selectedSlotBadge");
+
+function renderSlots(){
+  slotRows.innerHTML = "";
+
+  appData.slots.forEach(slot => {
+    const tr = document.createElement("tr");
+
+    const pill = slot.isAvailable
+      ? `<span class="status-pill available"><span class="mini-dot"></span>Available</span>`
+      : `<span class="status-pill occupied"><span class="mini-dot"></span>Occupied</span>`;
+
+    tr.innerHTML = `
+      <td><strong>${slot.slotId}</strong></td>
+      <td>${slot.location}</td>
+      <td>${pill}</td>
+      <td>
+        <button class="pick-btn" ${slot.isAvailable ? "" : "disabled"}>
+          ${txState.selectedSlotId === slot.slotId ? "Selected" : "Pick"}
+        </button>
+      </td>
+    `;
+
+    const pickBtn = tr.querySelector(".pick-btn");
+    if (pickBtn) {
+      pickBtn.addEventListener("click", () => {
+        if(!slot.isAvailable) return;
+        txState.selectedSlotId = slot.slotId;
+        selectedSlotBadge.style.display = "inline-block";
+        selectedSlotBadge.textContent = `Selected: ${slot.slotId}`;
+        btnGoTo3.disabled = false;
+        renderSlots();
+      });
+    }
+
+    slotRows.appendChild(tr);
+  });
+
+  if(txState.selectedSlotId){
+    selectedSlotBadge.style.display = "inline-block";
+    selectedSlotBadge.textContent = `Selected: ${txState.selectedSlotId}`;
+    btnGoTo3.disabled = false;
+  } else {
+    selectedSlotBadge.style.display = "none";
+    btnGoTo3.disabled = true;
+  }
+}
+
+document.getElementById("btnBackTo1").addEventListener("click", () => setStep(1));
+btnGoTo3.addEventListener("click", () => {
+  renderServices();
+  setStep(3);
+});
+
+/* STEP 3: Services rendering */
+const servicesGrid = document.getElementById("servicesGrid");
+const summaryNote = document.getElementById("summaryNote");
+
+function renderServices(){
+  servicesGrid.innerHTML = "";
+
+  appData.services.forEach(service => {
+    const card = document.createElement("div");
+    card.className = "service-card";
+    const toggleId = `svc_${service.serviceId}`;
+    const checked = txState.selectedServices.has(service.serviceId);
+
+    card.innerHTML = `
+      <div class="service-info">
+        <h3>${service.name}</h3>
+        <div class="price">₱${service.price}</div>
+      </div>
+      <label class="switch" title="${service.isAvailable ? "Select service" : "Not available"}">
+        <input type="checkbox" id="${toggleId}" ${checked ? "checked" : ""} ${service.isAvailable ? "" : "disabled"} />
+        <span class="slider"></span>
+      </label>
+    `;
+
+    card.style.opacity = service.isAvailable ? "1" : "0.45";
+
+    const checkbox = card.querySelector(`#${toggleId}`);
+    checkbox.addEventListener("change", (e) => {
+      if(!service.isAvailable) return;
+      if(e.target.checked) txState.selectedServices.add(service.serviceId);
+      else txState.selectedServices.delete(service.serviceId);
+      updateSummary();
+    });
+
+    servicesGrid.appendChild(card);
+  });
+
+  updateSummary();
+}
+
+function updateSummary(){
+  const chosen = appData.services.filter(s => txState.selectedServices.has(s.serviceId));
+  const total = chosen.reduce((sum, s) => sum + s.price, 0);
+
+  summaryNote.textContent =
+    `Customer: ${txState.customerName} • Plate: ${txState.plateNumber} • Slot: ${txState.selectedSlotId || "-"} • Services: ${chosen.length} • Total: ₱${total}`;
+}
+
+document.getElementById("btnBackTo2").addEventListener("click", () => setStep(2));
+
+/* Modal */
+const waitModal = document.getElementById("waitModal");
+const btnModalOk = document.getElementById("btnModalOk");
+
+function openWaitModal(){ waitModal.style.display = "flex"; }
+function closeWaitModal(){ waitModal.style.display = "none"; }
+
+btnModalOk.addEventListener("click", () => {
+  closeWaitModal();
+
+  document.getElementById("customerName").value = "";
+  document.getElementById("plateNumber").value = "";
+  document.getElementById("vehicleType").value = "Sedan";
+  txState.customerName = "";
+  txState.plateNumber = "";
+  txState.vehicleType = "Sedan";
+  txState.selectedSlotId = null;
+  txState.selectedServices = new Set();
+  setStep(1);
+});
+
+waitModal.addEventListener("click", (e) => { if(e.target === waitModal) closeWaitModal(); });
+document.addEventListener("keydown", (e) => { if(e.key === "Escape" && waitModal.style.display === "flex") closeWaitModal(); });
+
+document.getElementById("btnSubmitRequest").addEventListener("click", () => {
+  if(!txState.selectedSlotId){
+    alert("Please select a slot first.");
+    return;
+  }
+  openWaitModal();
+});
+</script>
+
+</body>
+</html>
