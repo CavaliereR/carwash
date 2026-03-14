@@ -21,8 +21,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;
   background:radial-gradient(ellipse 900px 600px at -10% -5%,rgba(0,212,255,0.06) 0%,transparent 55%),
     radial-gradient(ellipse 700px 500px at 110% 100%,rgba(0,184,156,0.05) 0%,transparent 55%);
   pointer-events:none;}
-
-/* Sidebar */
 .sidebar{position:fixed;left:0;top:0;bottom:0;width:230px;background:var(--bg1);border-right:1px solid var(--border);z-index:300;display:flex;flex-direction:column;}
 .sb-logo{display:flex;align-items:center;gap:10px;padding:20px 18px 16px;border-bottom:1px solid var(--border);}
 .sb-logo-mark{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--cyan),var(--teal));display:grid;place-items:center;flex-shrink:0;}
@@ -42,8 +40,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;
 .live-badge{display:flex;align-items:center;gap:7px;padding:8px 10px;border-radius:var(--r);background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.15);font-size:11px;color:#86efac;font-weight:500;margin:0 0 8px;}
 .live-dot{width:7px;height:7px;border-radius:999px;background:var(--green);animation:livePulse 2s infinite;}
 @keyframes livePulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.85);}}
-
-/* Main */
 .main{margin-left:230px;padding:0 28px 60px;position:relative;z-index:1;min-height:100vh;}
 .topbar{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 0;background:rgba(6,12,20,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);gap:16px;flex-wrap:wrap;}
 .topbar-left{display:flex;flex-direction:column;}
@@ -53,8 +49,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;
 .section{display:none;padding-top:24px;animation:fadeIn .3s ease both;}
 .section.active{display:block;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
-
-/* Stat cards */
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px;}
 .stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:20px;position:relative;overflow:hidden;transition:transform .2s;}
 .stat-card::after{content:'';position:absolute;top:-40px;right:-40px;width:110px;height:110px;border-radius:999px;opacity:.06;}
@@ -76,23 +70,17 @@ body::before{content:'';position:fixed;inset:0;z-index:0;
 .stat-card.s-top::after{background:var(--purple);}
 .stat-card.s-top .sc-icon{background:rgba(167,139,250,0.10);}
 .stat-card.s-top .sc-val{color:var(--purple);font-size:16px;padding-top:6px;}
-
-/* Panel */
 .panel{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);margin-bottom:18px;overflow:hidden;}
 .panel-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);gap:12px;flex-wrap:wrap;}
 .panel-head-l{display:flex;align-items:center;gap:10px;}
 .panel-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text);}
 .panel-body{padding:20px;}
-
-/* Tab bar */
 .tab-bar{display:flex;gap:4px;margin-bottom:20px;background:var(--bg3);padding:4px;border-radius:var(--r);width:fit-content;}
 .tab-btn{padding:8px 18px;border-radius:8px;border:none;background:transparent;font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:7px;}
 .tab-btn.active{background:rgba(0,212,255,0.12);color:var(--cyan);}
 .tab-btn:hover:not(.active){color:var(--soft);}
 .tab-count{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:rgba(255,255,255,0.08);color:var(--soft);font-size:10px;font-weight:700;}
 .tab-btn.active .tab-count{background:rgba(0,212,255,0.2);color:var(--cyan);}
-
-/* Toolbar */
 .toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px;}
 .search-wrap{position:relative;flex:1;min-width:200px;max-width:320px;}
 .search-wrap svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;opacity:.4;pointer-events:none;}
@@ -103,8 +91,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;
 .filter-select:focus{border-color:var(--cyan);}
 .filter-input-date{padding:9px 12px;border-radius:var(--r);border:1.5px solid var(--border2);background:var(--bg3);color:var(--text);font-family:'Outfit',sans-serif;font-size:13px;outline:none;transition:border-color .2s;}
 .filter-input-date:focus{border-color:var(--cyan);}
-
-/* Buttons */
 .btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:var(--r);border:none;cursor:pointer;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;transition:all .18s;white-space:nowrap;}
 .btn svg{width:14px;height:14px;flex-shrink:0;}
 .btn-primary{background:linear-gradient(90deg,var(--teal),var(--cyan));color:var(--bg0);box-shadow:0 6px 20px rgba(0,212,255,0.15);}
@@ -116,8 +102,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;
 .btn-success{background:rgba(34,197,94,0.12);border:1.5px solid rgba(34,197,94,0.3);color:#86efac;}
 .btn-success:hover{background:rgba(34,197,94,0.22);transform:translateY(-1px);}
 .btn-sm{padding:6px 11px;font-size:12px;}
-
-/* Table */
 .tbl-wrap{overflow-x:auto;}
 table.orders-table{width:100%;border-collapse:collapse;}
 .orders-table th{font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);padding:0 14px 12px;text-align:left;white-space:nowrap;}
@@ -146,8 +130,6 @@ table.orders-table{width:100%;border-collapse:collapse;}
 .empty-state p{font-size:13px;color:var(--muted);}
 .btn-done{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:8px;border:1.5px solid rgba(34,197,94,0.35);background:rgba(34,197,94,0.10);color:#86efac;font-size:11px;font-weight:700;cursor:pointer;transition:.18s;white-space:nowrap;font-family:'Outfit',sans-serif;}
 .btn-done:hover{background:rgba(34,197,94,0.22);transform:translateY(-1px);}
-
-/* Modal */
 .modal-overlay{display:none;position:fixed;inset:0;z-index:600;background:rgba(4,9,18,0.70);backdrop-filter:blur(14px);align-items:center;justify-content:center;}
 .modal-overlay.open{display:flex;}
 .modal{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r2);padding:28px;width:min(540px,calc(100% - 32px));box-shadow:var(--shadow);animation:fadeIn .25s ease both;max-height:90vh;overflow-y:auto;}
@@ -175,13 +157,7 @@ table.orders-table{width:100%;border-collapse:collapse;}
 .modal-alert.visible{display:block;}
 .modal-alert.warn{background:rgba(245,158,11,0.10);border:1px solid rgba(245,158,11,0.25);color:#fcd34d;}
 .modal-alert.error{background:rgba(239,68,68,0.10);border:1px solid rgba(239,68,68,0.25);color:#fca5a5;}
-
-/* ══ SLOT CARDS ══ */
-.slots-summary{
-  display:flex;align-items:center;gap:20px;
-  padding:16px 20px;border-bottom:1px solid var(--border);
-  flex-wrap:wrap;
-}
+.slots-summary{display:flex;align-items:center;gap:20px;padding:16px 20px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
 .slots-stat{display:flex;align-items:center;gap:8px;}
 .slots-stat-dot{width:10px;height:10px;border-radius:999px;flex-shrink:0;}
 .slots-stat-dot.av{background:var(--green);box-shadow:0 0 8px rgba(34,197,94,0.5);}
@@ -191,100 +167,34 @@ table.orders-table{width:100%;border-collapse:collapse;}
 .slots-stat-num.av{color:var(--green);}
 .slots-stat-num.oc{color:var(--red);}
 .slots-divider{width:1px;height:32px;background:var(--border);}
-
-.slot-filter-bar{
-  display:flex;gap:6px;align-items:center;
-  padding:14px 20px;border-bottom:1px solid var(--border);
-  flex-wrap:wrap;
-}
-.slot-filter-btn{
-  padding:6px 16px;border-radius:999px;border:1.5px solid var(--border2);
-  background:transparent;color:var(--muted);font-family:'Outfit',sans-serif;
-  font-size:12px;font-weight:600;cursor:pointer;transition:all .18s;
-}
+.slot-filter-bar{display:flex;gap:6px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.slot-filter-btn{padding:6px 16px;border-radius:999px;border:1.5px solid var(--border2);background:transparent;color:var(--muted);font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .18s;}
 .slot-filter-btn:hover{color:var(--soft);border-color:rgba(255,255,255,0.2);}
 .slot-filter-btn.active{background:rgba(0,212,255,0.10);border-color:rgba(0,212,255,0.3);color:var(--cyan);}
-
-.slot-cards-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
-  gap:14px;
-  padding:20px;
-}
-
-.slot-card{
-  position:relative;border-radius:14px;padding:18px 16px 14px;
-  border:1.5px solid;cursor:default;
-  transition:transform .2s,box-shadow .2s,border-color .2s;
-  animation:fadeIn .3s ease both;
-  overflow:hidden;
-}
-.slot-card::before{
-  content:'';position:absolute;inset:0;
-  border-radius:inherit;opacity:0;
-  transition:opacity .2s;pointer-events:none;
-}
+.slot-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;padding:20px;}
+.slot-card{position:relative;border-radius:14px;padding:18px 16px 14px;border:1.5px solid;cursor:default;transition:transform .2s,box-shadow .2s,border-color .2s;animation:fadeIn .3s ease both;overflow:hidden;}
+.slot-card::before{content:'';position:absolute;inset:0;border-radius:inherit;opacity:0;transition:opacity .2s;pointer-events:none;}
 .slot-card:hover{transform:translateY(-3px);}
-
-/* Available */
-.slot-card.av{
-  border-color:rgba(34,197,94,0.25);
-  background:linear-gradient(145deg,rgba(34,197,94,0.06) 0%,rgba(0,184,156,0.04) 100%);
-}
+.slot-card.av{border-color:rgba(34,197,94,0.25);background:linear-gradient(145deg,rgba(34,197,94,0.06) 0%,rgba(0,184,156,0.04) 100%);}
 .slot-card.av::before{background:linear-gradient(135deg,rgba(34,197,94,0.08),transparent);}
 .slot-card.av:hover{border-color:rgba(34,197,94,0.5);box-shadow:0 10px 30px rgba(34,197,94,0.12),0 0 0 1px rgba(34,197,94,0.1);}
 .slot-card.av:hover::before{opacity:1;}
-
-/* Occupied */
-.slot-card.oc{
-  border-color:rgba(239,68,68,0.2);
-  background:linear-gradient(145deg,rgba(239,68,68,0.05) 0%,rgba(239,68,68,0.02) 100%);
-  opacity:.75;
-}
+.slot-card.oc{border-color:rgba(239,68,68,0.2);background:linear-gradient(145deg,rgba(239,68,68,0.05) 0%,rgba(239,68,68,0.02) 100%);opacity:.75;}
 .slot-card.oc:hover{border-color:rgba(239,68,68,0.35);box-shadow:0 10px 30px rgba(239,68,68,0.08);}
-
-.slot-card-id{
-  font-family:'Syne',sans-serif;font-size:18px;font-weight:800;
-  letter-spacing:-.3px;margin-bottom:2px;
-}
+.slot-card-id{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.3px;margin-bottom:2px;}
 .slot-card.av .slot-card-id{color:var(--text);}
 .slot-card.oc .slot-card-id{color:var(--soft);}
-
 .slot-card-loc{font-size:11px;color:var(--muted);margin-bottom:12px;font-weight:500;}
-
-.slot-card-badge{
-  display:inline-flex;align-items:center;gap:5px;
-  padding:4px 9px;border-radius:999px;font-size:11px;font-weight:700;
-  margin-bottom:12px;
-}
+.slot-card-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border-radius:999px;font-size:11px;font-weight:700;margin-bottom:12px;}
 .slot-card.av .slot-card-badge{background:rgba(34,197,94,0.12);color:#86efac;}
 .slot-card.oc .slot-card-badge{background:rgba(239,68,68,0.12);color:#fca5a5;}
 .slot-badge-dot{width:5px;height:5px;border-radius:999px;background:currentColor;}
-
-.slot-card-select{
-  width:100%;padding:7px 10px;border-radius:8px;
-  font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;
-  outline:none;cursor:pointer;transition:all .2s;
-  -webkit-appearance:none;appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234a5e7a' stroke-width='2.5'%3E%3Cpath d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 8px center;
-  padding-right:28px;
-}
-.slot-card.av .slot-card-select{
-  border:1.5px solid rgba(34,197,94,0.25);
-  background-color:rgba(34,197,94,0.08);
-  color:#86efac;
-}
+.slot-card-select{width:100%;padding:7px 10px;border-radius:8px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;outline:none;cursor:pointer;transition:all .2s;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234a5e7a' stroke-width='2.5'%3E%3Cpath d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:28px;}
+.slot-card.av .slot-card-select{border:1.5px solid rgba(34,197,94,0.25);background-color:rgba(34,197,94,0.08);color:#86efac;}
 .slot-card.av .slot-card-select:hover{border-color:rgba(34,197,94,0.5);background-color:rgba(34,197,94,0.14);}
-.slot-card.oc .slot-card-select{
-  border:1.5px solid rgba(239,68,68,0.2);
-  background-color:rgba(239,68,68,0.08);
-  color:#fca5a5;
-}
+.slot-card.oc .slot-card-select{border:1.5px solid rgba(239,68,68,0.2);background-color:rgba(239,68,68,0.08);color:#fca5a5;}
 .slot-card.oc .slot-card-select:hover{border-color:rgba(239,68,68,0.4);background-color:rgba(239,68,68,0.14);}
 .slot-card-select option{background:var(--bg2);color:var(--text);}
-
-/* Dashboard slot mini tiles */
 .slot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;}
 .slot-tile{border-radius:var(--r);border:1.5px solid;padding:14px 12px;transition:all .18s;}
 .slot-tile.av{border-color:rgba(34,197,94,0.3);background:rgba(34,197,94,0.05);}
@@ -295,8 +205,6 @@ table.orders-table{width:100%;border-collapse:collapse;}
 .slot-status-txt{font-size:11px;font-weight:600;}
 .slot-tile.av .slot-status-txt{color:#86efac;}
 .slot-tile.oc .slot-status-txt{color:#fca5a5;}
-
-/* Services Cards */
 #svcAdminMount{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
 .svc-card{position:relative;border-radius:14px;border:1px solid var(--border);background:var(--bg3);padding:20px;overflow:hidden;transition:transform .2s,border-color .25s,box-shadow .25s;animation:fadeIn .3s ease both;}
 .svc-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,212,255,0.05) 0%,transparent 60%);opacity:0;transition:opacity .25s;pointer-events:none;}
@@ -317,8 +225,11 @@ table.orders-table{width:100%;border-collapse:collapse;}
 .svc-avail-dot{width:7px;height:7px;border-radius:999px;background:var(--muted);flex-shrink:0;}
 .svc-card:not(.unavailable) .svc-avail-label{color:#86efac;}
 .svc-card:not(.unavailable) .svc-avail-dot{background:var(--green);box-shadow:0 0 6px rgba(34,197,94,0.5);}
+.svc-footer-btns{display:flex;gap:6px;align-items:center;}
 .btn-svc-edit{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:7px;border:1px solid var(--border2);background:rgba(255,255,255,0.04);color:var(--soft);font-size:11px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;}
 .btn-svc-edit:hover{background:rgba(0,212,255,0.08);border-color:rgba(0,212,255,0.28);color:var(--cyan);}
+.btn-svc-delete{display:inline-flex;align-items:center;padding:5px 9px;border-radius:7px;border:1px solid rgba(239,68,68,0.18);background:rgba(239,68,68,0.06);color:#fca5a5;font-size:12px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;line-height:1;}
+.btn-svc-delete:hover{background:rgba(239,68,68,0.16);border-color:rgba(239,68,68,0.4);}
 .svc-edit-row{max-height:0;overflow:hidden;display:flex;align-items:flex-end;gap:8px;flex-wrap:wrap;margin-top:0;padding-top:0;border-top:0px solid var(--border);opacity:0;transition:max-height .3s ease,opacity .25s ease,margin-top .3s ease,padding-top .3s ease;}
 .svc-edit-row.open{max-height:200px;opacity:1;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);}
 .svc-price-input-wrap{display:flex;flex-direction:column;gap:5px;flex:1;min-width:90px;}
@@ -330,19 +241,13 @@ table.orders-table{width:100%;border-collapse:collapse;}
 .btn-svc-save:hover{filter:brightness(1.08);transform:translateY(-1px);}
 .btn-svc-cancel{padding:8px 14px;border-radius:8px;border:1px solid var(--border2);background:transparent;color:var(--muted);font-size:13px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;}
 .btn-svc-cancel:hover{color:var(--soft);}
-
-/* Switch */
 .switch{position:relative;display:inline-block;width:44px;height:24px;flex-shrink:0;}
 .switch input{display:none;}
 .slider{position:absolute;cursor:pointer;inset:0;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.14);transition:.2s;border-radius:999px;}
 .slider::before{position:absolute;content:"";height:16px;width:16px;left:4px;top:50%;transform:translateY(-50%);background:rgba(6,12,20,.95);transition:.2s;border-radius:999px;}
 .switch input:checked+.slider{background:rgba(0,184,156,0.35);border-color:rgba(0,184,156,0.6);}
 .switch input:checked+.slider::before{transform:translate(20px,-50%);}
-
-/* Confirm modal */
 .confirm-body{font-size:14px;color:var(--soft);line-height:1.6;margin-bottom:20px;}
-
-/* Toast */
 .toast-container{position:fixed;bottom:24px;right:24px;z-index:1000;display:flex;flex-direction:column;gap:8px;}
 .toast{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:var(--r);background:var(--bg2);border:1px solid var(--border2);font-size:13px;box-shadow:var(--shadow);animation:toastIn .3s ease both;min-width:260px;max-width:360px;}
 @keyframes toastIn{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
@@ -360,8 +265,6 @@ table.orders-table{width:100%;border-collapse:collapse;}
 .toast.info .toast-icon svg{stroke:var(--cyan);}
 .toast-msg{flex:1;color:var(--text);}
 .count-badge{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:rgba(0,212,255,0.12);color:var(--cyan);font-size:11px;font-weight:700;font-family:'Syne',sans-serif;}
-
-/* Service Checkbox Dropdown */
 .svc-dropdown-wrap{position:relative;}
 .svc-dropdown-trigger{width:100%;padding:11px 13px;border-radius:var(--r);border:1.5px solid var(--border2);background:var(--bg3);color:var(--text);font-family:'Outfit',sans-serif;font-size:14px;outline:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;transition:all .2s;user-select:none;}
 .svc-dropdown-trigger:hover{border-color:rgba(255,255,255,0.2);}
@@ -389,6 +292,10 @@ table.orders-table{width:100%;border-collapse:collapse;}
 .svc-selected-count{font-size:11px;color:var(--muted);}
 .svc-clear-btn{font-size:11px;color:var(--soft);background:none;border:none;cursor:pointer;padding:3px 8px;border-radius:5px;font-family:'Outfit',sans-serif;transition:color .15s;}
 .svc-clear-btn:hover{color:#fca5a5;}
+
+/* ══ ADD SERVICE MODAL extras ══ */
+.svc-modal-info{background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.13);border-radius:var(--r);padding:10px 14px;font-size:12px;color:var(--soft);margin-bottom:18px;line-height:1.6;}
+.svc-modal-info strong{color:var(--cyan);}
 
 @media(max-width:960px){.sidebar{display:none;}.main{margin-left:0;}.stats-grid{grid-template-columns:repeat(2,1fr);}.form-row{grid-template-columns:1fr;}}
 @media(max-width:560px){.stats-grid{grid-template-columns:1fr 1fr;}.main{padding:0 16px 50px;}.slot-cards-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;padding:14px;}}
@@ -533,10 +440,9 @@ table.orders-table{width:100%;border-collapse:collapse;}
     </div>
   </section>
 
-  <!-- SLOTS — redesigned -->
+  <!-- SLOTS -->
   <section class="section" id="sec-slots">
     <div class="panel" style="overflow:visible;">
-      <!-- Summary bar -->
       <div class="slots-summary">
         <div class="slots-stat">
           <span class="slots-stat-dot av"></span>
@@ -555,21 +461,15 @@ table.orders-table{width:100%;border-collapse:collapse;}
           <span class="slots-stat-num" style="color:var(--soft);margin-left:6px;" id="slotTotalNum">0</span>
         </div>
       </div>
-      <!-- Filter pills -->
       <div class="slot-filter-bar">
         <button class="slot-filter-btn active" id="sfAll" onclick="renderSlotsSection('ALL',this)">All Bays</button>
         <button class="slot-filter-btn" id="sfAv" onclick="renderSlotsSection('available',this)">
-          <span style="display:inline-flex;align-items:center;gap:5px;">
-            <span style="width:7px;height:7px;border-radius:999px;background:var(--green);display:inline-block;"></span>Available
-          </span>
+          <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:7px;height:7px;border-radius:999px;background:var(--green);display:inline-block;"></span>Available</span>
         </button>
         <button class="slot-filter-btn" id="sfOc" onclick="renderSlotsSection('occupied',this)">
-          <span style="display:inline-flex;align-items:center;gap:5px;">
-            <span style="width:7px;height:7px;border-radius:999px;background:var(--red);display:inline-block;"></span>Occupied
-          </span>
+          <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:7px;height:7px;border-radius:999px;background:var(--red);display:inline-block;"></span>Occupied</span>
         </button>
       </div>
-      <!-- Cards grid -->
       <div class="slot-cards-grid" id="adminSlotGrid"></div>
     </div>
   </section>
@@ -578,15 +478,24 @@ table.orders-table{width:100%;border-collapse:collapse;}
   <section class="section" id="sec-services">
     <div class="panel">
       <div class="panel-head">
-        <div class="panel-title">Service Configuration</div>
-        <div style="font-size:12px;color:var(--muted);">Toggle availability · Edit Car &amp; Moto prices</div>
+        <div class="panel-head-l">
+          <div class="panel-title">Service Configuration</div>
+          <span class="count-badge" id="svcCount">0</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div style="font-size:12px;color:var(--muted);">Toggle availability · Edit Car &amp; Moto prices</div>
+          <button class="btn btn-primary btn-sm" onclick="openAddServiceModal()">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" d="M12 4v16m8-8H4"/></svg>
+            Add Service
+          </button>
+        </div>
       </div>
       <div class="panel-body"><div id="svcAdminMount"></div></div>
     </div>
   </section>
 </main>
 
-<!-- ADD/EDIT ORDER MODAL -->
+<!-- ORDER MODAL -->
 <div class="modal-overlay" id="orderModal">
   <div class="modal">
     <div class="modal-header">
@@ -664,6 +573,59 @@ table.orders-table{width:100%;border-collapse:collapse;}
     <div class="modal-actions">
       <button class="btn btn-ghost" onclick="closeModal('orderModal')">Cancel</button>
       <button class="btn btn-primary" id="modalSaveBtn" onclick="saveOrder()">Save Order</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ADD SERVICE MODAL ══ -->
+<div class="modal-overlay" id="addServiceModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Add New Service</div>
+        <div class="modal-title-sub">Create a new wash or detailing service</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('addServiceModal')">✕</button>
+    </div>
+    <div class="svc-modal-info">
+      The new service will appear in the order form immediately. You can toggle availability or adjust prices at any time from the Services panel.
+    </div>
+    <div class="modal-alert" id="svcModalAlert"></div>
+    <div class="form-row single">
+      <div class="form-group">
+        <label class="form-label">Service Name *</label>
+        <input class="form-input" id="fSvcName" placeholder="e.g. Full Detail, Undercarriage Wash…" oninput="clearErr('fSvcName','errSvcName')">
+        <div class="form-error" id="errSvcName"></div>
+        <div class="form-hint">Use a clear, descriptive name customers will recognize.</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">🚗 Car Price (₱) *</label>
+        <input class="form-input" id="fSvcCarPrice" type="number" min="0" step="0.01" placeholder="0" style="font-family:'DM Mono',monospace;" oninput="clearErr('fSvcCarPrice','errSvcCarPrice')">
+        <div class="form-error" id="errSvcCarPrice"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">🏍 Motorcycle Price (₱) *</label>
+        <input class="form-input" id="fSvcMotoPrice" type="number" min="0" step="0.01" placeholder="0" style="font-family:'DM Mono',monospace;" oninput="clearErr('fSvcMotoPrice','errSvcMotoPrice')">
+        <div class="form-error" id="errSvcMotoPrice"></div>
+      </div>
+    </div>
+    <div class="form-row single">
+      <div class="form-group">
+        <label class="form-label">Initial Availability</label>
+        <select class="form-select" id="fSvcAvail">
+          <option value="1">✓ Available — show in kiosk &amp; order form</option>
+          <option value="0">✗ Unavailable — hidden from customers</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('addServiceModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveNewService()">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" d="M12 4v16m8-8H4"/></svg>
+        Create Service
+      </button>
     </div>
   </div>
 </div>
@@ -833,7 +795,7 @@ function confirmComplete(id){
 }
 async function doComplete(id){closeModal('confirmModal');try{await apiFetch('update_order_status',{id,status:'Completed'});toast('success','Order marked as Completed. Slot released.');await refreshAll();}catch(e){toast('error','Failed: '+e.message);}}
 
-/* Service Dropdown */
+/* Service Dropdown (Order Form) */
 function toggleSvcDropdown(){const t=document.getElementById('svcDropdownTrigger');if(t.classList.contains('disabled'))return;svcDropOpen=!svcDropOpen;t.classList.toggle('open',svcDropOpen);document.getElementById('svcDropdownPanel').classList.toggle('open',svcDropOpen);}
 function closeSvcDropdown(){svcDropOpen=false;document.getElementById('svcDropdownTrigger').classList.remove('open');document.getElementById('svcDropdownPanel').classList.remove('open');}
 function buildSvcDropdownItems(vehicleType){
@@ -861,7 +823,7 @@ function clearSvcSelection(){svcSelected=[];document.querySelectorAll('#svcPanel
 function setSvcDropdownDisabled(d){const t=document.getElementById('svcDropdownTrigger');if(d){t.classList.add('disabled');closeSvcDropdown();}else t.classList.remove('disabled');}
 document.addEventListener('click',e=>{if(svcDropOpen&&!document.getElementById('svcDropdownWrap').contains(e.target))closeSvcDropdown();});
 
-/* Modal */
+/* Order Modal */
 function openAddModal(){
   const av=slots.filter(s=>s.isAvailable).length,ao=orders.filter(o=>o.status==='Pending'||o.status==='In Progress').length;
   if(av>0&&ao>=av){toast('warn','All wash slots are currently occupied.');showModalAlert('warn','All wash slots are currently occupied.');}
@@ -923,26 +885,80 @@ function confirmDeleteOrder(id){
 }
 async function deleteOrder(id){try{await apiFetch('delete_order',{id});closeModal('confirmModal');toast('success','Order deleted.');await refreshAll();}catch(e){toast('error','Delete failed: '+e.message);}}
 
-/* ══ SLOTS SECTION — Card Layout ══ */
+/* ══ ADD SERVICE MODAL ══ */
+function openAddServiceModal(){
+  ['fSvcName','fSvcCarPrice','fSvcMotoPrice'].forEach(id=>{
+    const el=document.getElementById(id);if(el){el.value='';el.classList.remove('error');}
+  });
+  document.getElementById('fSvcAvail').value='1';
+  document.getElementById('svcModalAlert').className='modal-alert';
+  document.querySelectorAll('#addServiceModal .form-error').forEach(e=>{e.textContent='';e.classList.remove('visible');});
+  document.getElementById('addServiceModal').classList.add('open');
+  setTimeout(()=>document.getElementById('fSvcName').focus(),100);
+}
+
+async function saveNewService(){
+  const name=document.getElementById('fSvcName').value.trim();
+  const carPriceRaw=document.getElementById('fSvcCarPrice').value;
+  const motoPriceRaw=document.getElementById('fSvcMotoPrice').value;
+  const isAvailable=parseInt(document.getElementById('fSvcAvail').value);
+  let valid=true;
+
+  if(!name){setErr('fSvcName','errSvcName','Service name is required.');valid=false;}
+  else if(services.some(s=>s.name.toLowerCase()===name.toLowerCase())){
+    setErr('fSvcName','errSvcName','A service with this name already exists.');valid=false;
+  }
+
+  const carPrice=parseFloat(carPriceRaw);
+  if(carPriceRaw===''||isNaN(carPrice)||carPrice<0){
+    setErr('fSvcCarPrice','errSvcCarPrice','Enter a valid price (0 or more).');valid=false;
+  }
+
+  const motoPrice=parseFloat(motoPriceRaw);
+  if(motoPriceRaw===''||isNaN(motoPrice)||motoPrice<0){
+    setErr('fSvcMotoPrice','errSvcMotoPrice','Enter a valid price (0 or more).');valid=false;
+  }
+
+  if(!valid)return;
+
+  try{
+    await apiFetch('add_service',{name,carPrice,motoPrice,isAvailable});
+    toast('success','"'+name+'" added to services.');
+    closeModal('addServiceModal');
+    await refreshAll();
+  }catch(e){
+    const el=document.getElementById('svcModalAlert');
+    el.textContent='Failed to create service: '+e.message;
+    el.className='modal-alert error visible';
+  }
+}
+
+/* ══ DELETE SERVICE ══ */
+function confirmDeleteService(id){
+  const s=services.find(x=>x.id==id);if(!s)return;
+  document.getElementById('confirmTitle').textContent='Delete Service?';document.getElementById('confirmTitle').style.color='var(--red)';
+  document.getElementById('confirmBody').innerHTML='Permanently delete <strong>'+esc(s.name)+'</strong>?<br><br>This removes it from all menus. Existing orders using this service are unaffected.';
+  document.getElementById('confirmOkBtn').className='btn btn-danger';document.getElementById('confirmOkBtn').textContent='Delete Service';
+  document.getElementById('confirmOkBtn').onclick=()=>doDeleteService(id);
+  document.getElementById('confirmModal').classList.add('open');
+}
+async function doDeleteService(id){
+  try{await apiFetch('delete_service',{id});closeModal('confirmModal');toast('success','Service deleted.');await refreshAll();}
+  catch(e){toast('error','Delete failed: '+e.message);}
+}
+
+/* Slots Section */
 function renderSlotsSection(filter,btn){
   currentSlotFilter=filter;
-  if(btn){
-    document.querySelectorAll('.slot-filter-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-  }
+  if(btn){document.querySelectorAll('.slot-filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
   const occupied=getOccupiedSlotIds();
   let list=slots.map(s=>({...s,_eff:s.isAvailable&&!occupied.has(s.slotId)}));
   if(filter==='available')list=list.filter(s=>s._eff);
   if(filter==='occupied') list=list.filter(s=>!s._eff);
-
-  // Update summary numbers
   const allList=slots.map(s=>({...s,_eff:s.isAvailable&&!occupied.has(s.slotId)}));
-  const totalAv=allList.filter(s=>s._eff).length;
-  const totalOc=allList.filter(s=>!s._eff).length;
-  document.getElementById('slotAvailNum').textContent=totalAv;
-  document.getElementById('slotOccNum').textContent=totalOc;
+  document.getElementById('slotAvailNum').textContent=allList.filter(s=>s._eff).length;
+  document.getElementById('slotOccNum').textContent=allList.filter(s=>!s._eff).length;
   document.getElementById('slotTotalNum').textContent=slots.length;
-
   const grid=document.getElementById('adminSlotGrid');grid.innerHTML='';
   list.forEach((s,i)=>{
     const card=document.createElement('div');
@@ -958,12 +974,8 @@ function renderSlotsSection(filter,btn){
       '</select>';
     card.querySelector('select').addEventListener('change',async e=>{
       const slotId=e.target.getAttribute('data-slotid'),avail=e.target.value==='available'?1:0;
-      try{
-        await apiFetch('toggle_slot',{slotId,isAvailable:avail});
-        const sl=slots.find(x=>x.slotId===slotId);if(sl)sl.isAvailable=!!avail;
-        toast('success',slotId+' marked '+(avail?'Available':'Occupied'));
-        renderSlotsSection(currentSlotFilter,null);renderDashboardSlots();
-      }catch(err){toast('error','Failed: '+err.message);}
+      try{await apiFetch('toggle_slot',{slotId,isAvailable:avail});const sl=slots.find(x=>x.slotId===slotId);if(sl)sl.isAvailable=!!avail;toast('success',slotId+' marked '+(avail?'Available':'Occupied'));renderSlotsSection(currentSlotFilter,null);renderDashboardSlots();}
+      catch(err){toast('error','Failed: '+err.message);}
     });
     grid.appendChild(card);
   });
@@ -971,6 +983,7 @@ function renderSlotsSection(filter,btn){
 
 /* Services Admin */
 function renderServicesAdmin(){
+  document.getElementById('svcCount').textContent=services.length;
   const m=document.getElementById('svcAdminMount');m.innerHTML='';
   const icons={
     'Basic Wash':'<path stroke-linecap="round" stroke-linejoin="round" d="M3 15s1-4 9-4 9 4 9 4M7 19h10M5 11c0-5 3-8 7-8s7 3 7 8"/>',
@@ -983,6 +996,15 @@ function renderServicesAdmin(){
     'Tire Cleaning':'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 3v2M12 19v2M3 12h2M19 12h2"/>',
   };
   const defIcon='<circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 8v4l3 3"/>';
+
+  if(!services.length){
+    m.innerHTML='<div class="empty-state" style="grid-column:1/-1;padding:60px 24px;">'+
+      '<svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2"><path stroke-linecap="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>'+
+      '<h3>No services configured yet.</h3><p>Click "Add Service" to create your first service.</p>'+
+      '</div>';
+    return;
+  }
+
   services.forEach((s,i)=>{
     const card=document.createElement('div');
     card.className='svc-card'+(s.isAvailable?'':' unavailable');
@@ -999,7 +1021,10 @@ function renderServicesAdmin(){
       '</div>'+
       '<div class="svc-card-footer">'+
         '<span class="svc-avail-label"><span class="svc-avail-dot"></span>'+(s.isAvailable?'Available':'Unavailable')+'</span>'+
-        '<button class="btn-svc-edit" onclick="openPriceEdit('+s.id+')">✏ Edit Prices</button>'+
+        '<div class="svc-footer-btns">'+
+          '<button class="btn-svc-edit" onclick="openPriceEdit('+s.id+')">✏ Edit</button>'+
+          '<button class="btn-svc-delete" title="Delete service" onclick="confirmDeleteService('+s.id+')">🗑</button>'+
+        '</div>'+
       '</div>'+
       '<div class="svc-edit-row" id="priceInputs_'+s.id+'">'+
         '<div class="svc-price-input-wrap"><span class="svc-price-input-lbl">Car ₱</span><input class="svc-price-inp" id="carIn_'+s.id+'" type="number" min="0" value="'+s.carPrice+'"></div>'+

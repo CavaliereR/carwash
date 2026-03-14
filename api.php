@@ -57,6 +57,80 @@ try {
             $result = $db->query("UPDATE services SET is_available=$avail WHERE id=$id");
             echo json_encode(['ok' => (bool)$result, 'id' => $id, 'isAvailable' => $avail, 'error' => $db->error ?: null]);
             break;
+        
+        case 'add_service':
+            $db        = getDB();
+            $data      = json_decode(file_get_contents('php://input'), true) ?? $_POST;
+            $name      = trim($data['name'] ?? '');
+            $carPrice  = floatval($data['carPrice']  ?? 0);
+            $motoPrice = floatval($data['motoPrice'] ?? 0);
+            $avail     = intval($data['isAvailable'] ?? 1);
+
+            if ($name === '') {
+                http_response_code(400);
+                echo json_encode(['ok' => false, 'error' => 'Service name is required']);
+                break;
+            }
+        
+        case 'delete_service':
+            $db   = getDB();
+            $data = json_decode(file_get_contents('php://input'), true) ?? $_POST;
+            $id   = intval($data['id'] ?? 0);
+
+            if ($id === 0) {
+                http_response_code(400);
+                echo json_encode(['ok' => false, 'error' => 'Invalid service ID']);
+                break;
+            }
+
+            $stmt = $db->prepare("DELETE FROM services WHERE id = ?");
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            echo json_encode(['ok' => true]);
+            break;
+           
+           
+            // Check for duplicate name
+            $chk = $db->prepare("SELECT id FROM services WHERE LOWER(name) = LOWER(?)");
+            $chk->bind_param('s', $name);
+            $chk->execute();
+            if ($chk->get_result()->num_rows > 0) {
+                http_response_code(400);
+                echo json_encode(['ok' => false, 'error' => 'A service with this name already exists']);
+                break;
+            }
+
+            $stmt = $db->prepare("
+                INSERT INTO services (name, car_price, moto_price, is_available)
+                VALUES (?, ?, ?, ?)
+            ");
+            $stmt->bind_param('sddi', $name, $carPrice, $motoPrice, $avail);
+            $stmt->execute();
+
+            $newId = $db->insert_id;
+            $row   = $db->query("
+                SELECT id, name, car_price AS carPrice, moto_price AS motoPrice, is_available AS isAvailable
+                FROM services WHERE id = $newId
+            ")->fetch_assoc();
+            echo json_encode(['ok' => true, 'service' => $row]);
+            break;
+
+        case 'delete_service':
+            $db   = getDB();
+            $data = json_decode(file_get_contents('php://input'), true) ?? $_POST;
+            $id   = intval($data['id'] ?? 0);
+
+            if ($id === 0) {
+                http_response_code(400);
+                echo json_encode(['ok' => false, 'error' => 'Invalid service ID']);
+                break;
+            }
+
+            $stmt = $db->prepare("DELETE FROM services WHERE id = ?");
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            echo json_encode(['ok' => true]);
+            break;
 
         // ════════════════════ ORDERS ═════════════════════════
         case 'get_orders':
