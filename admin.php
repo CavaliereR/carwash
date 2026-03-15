@@ -495,7 +495,7 @@ table.orders-table{width:100%;border-collapse:collapse;}
   </section>
 </main>
 
-<!-- ORDER MODAL -->
+<!-- ORDER MODAL — Status field removed -->
 <div class="modal-overlay" id="orderModal">
   <div class="modal">
     <div class="modal-header">
@@ -534,7 +534,7 @@ table.orders-table{width:100%;border-collapse:collapse;}
         <div class="form-error" id="errSlot"></div>
       </div>
     </div>
-    <div class="form-row">
+    <div class="form-row single">
       <div class="form-group">
         <label class="form-label">Service *</label>
         <div class="svc-dropdown-wrap" id="svcDropdownWrap">
@@ -551,16 +551,6 @@ table.orders-table{width:100%;border-collapse:collapse;}
           </div>
         </div>
         <div class="form-error" id="errService"></div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Status *</label>
-        <select class="form-select" id="fStatus" onchange="clearErr('fStatus','errStatus')">
-          <option value="Pending">Pending</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Completed">Completed</option>
-          <option value="Cancelled">Cancelled</option>
-        </select>
-        <div class="form-error" id="errStatus"></div>
       </div>
     </div>
     <div class="form-row single">
@@ -838,15 +828,15 @@ function openEditModal(id){
   document.getElementById('modalSaveBtn').textContent='Update Order';document.getElementById('modalSaveBtn').style.display=ro?'none':'';
   document.getElementById('readonlyBanner').style.display=ro?'':'none';document.getElementById('modalAlert').className='modal-alert';
   resetForm(ro);
-  document.getElementById('fCustName').value=o.customerName;document.getElementById('fPlate').value=o.plateNumber;document.getElementById('fVehicle').value=o.vehicleType;document.getElementById('fStatus').value=o.status;
+  document.getElementById('fCustName').value=o.customerName;document.getElementById('fPlate').value=o.plateNumber;document.getElementById('fVehicle').value=o.vehicleType;
   populateSlotDropdown(id);document.getElementById('fSlot').value=o.slotId;
   svcSelected=o.service.split(',').map(s=>s.trim()).filter(Boolean);buildSvcDropdownItems(o.vehicleType);updatePriceDisplay();
   document.getElementById('orderModal').classList.add('open');
 }
 function closeModal(id){document.getElementById(id).classList.remove('open');if(id==='orderModal')closeSvcDropdown();}
 function resetForm(ro){
-  ['fCustName','fPlate','fVehicle','fSlot','fStatus'].forEach(id=>{const el=document.getElementById(id);if(el){el.value='';el.classList.remove('error');el.disabled=ro;}});
-  document.getElementById('fStatus').value='Pending';document.querySelectorAll('.form-error').forEach(e=>{e.textContent='';e.classList.remove('visible');});
+  ['fCustName','fPlate','fVehicle','fSlot'].forEach(id=>{const el=document.getElementById(id);if(el){el.value='';el.classList.remove('error');el.disabled=ro;}});
+  document.querySelectorAll('.form-error').forEach(e=>{e.textContent='';e.classList.remove('visible');});
   document.getElementById('priceDisplay').textContent='₱0';document.getElementById('modalAlert').className='modal-alert';
   svcSelected=[];closeSvcDropdown();buildSvcDropdownItems('');setSvcDropdownDisabled(ro);
 }
@@ -859,7 +849,7 @@ function populateSlotDropdown(ex){
 function onVehicleChange(){const v=document.getElementById('fVehicle').value;if(isMoto(v))svcSelected=svcSelected.filter(s=>!MOTO_INCOMPATIBLE.includes(s));buildSvcDropdownItems(v);updatePriceDisplay();clearErr('fVehicle','errVehicle');}
 function updatePriceDisplay(){const v=document.getElementById('fVehicle').value;if(!v||!svcSelected.length){document.getElementById('priceDisplay').textContent='₱0';return;}document.getElementById('priceDisplay').textContent='₱'+svcSelected.reduce((sum,s)=>sum+getServicePrice(s,v),0).toLocaleString();}
 async function saveOrder(){
-  const name=document.getElementById('fCustName').value.trim(),plate=document.getElementById('fPlate').value.trim(),vehicle=document.getElementById('fVehicle').value,slotId=document.getElementById('fSlot').value,status=document.getElementById('fStatus').value,service=svcSelected.join(', ');
+  const name=document.getElementById('fCustName').value.trim(),plate=document.getElementById('fPlate').value.trim(),vehicle=document.getElementById('fVehicle').value,slotId=document.getElementById('fSlot').value,service=svcSelected.join(', ');
   let valid=true;
   if(!name){setErr('fCustName','errCustName','Customer name is required.');valid=false;}
   if(!plate){setErr('fPlate','errPlate','Plate number is required.');valid=false;}
@@ -867,12 +857,11 @@ async function saveOrder(){
   if(!svcSelected.length){document.getElementById('svcDropdownTrigger').classList.add('error');setErr('svcDropdownTrigger','errService','Please select at least one service.');valid=false;}
   if(!slotId){setErr('fSlot','errSlot','Please select an available slot.');valid=false;}
   if(valid&&slotId){const occ=getOccupiedSlotIds();const cur=editingOrderId?orders.find(o=>o.id==editingOrderId)?.slotId:null;if(occ.has(slotId)&&slotId!==cur){setErr('fSlot','errSlot','This slot is already occupied.');valid=false;}}
-  if(valid&&status==='In Progress'&&slotId){const c=orders.find(o=>o.id!=editingOrderId&&o.slotId===slotId&&o.status==='In Progress');if(c){setErr('fSlot','errSlot',slotId+' is currently occupied.');valid=false;}}
   if(valid&&svcSelected.length&&vehicle&&isMoto(vehicle)){const bad=svcSelected.filter(s=>MOTO_INCOMPATIBLE.includes(s));if(bad.length){document.getElementById('svcDropdownTrigger').classList.add('error');setErr('svcDropdownTrigger','errService',bad.join(', ')+' not available for motorcycles.');valid=false;}}
-  if(valid&&editingOrderId&&status==='Completed'){const prev=orders.find(o=>o.id==editingOrderId);if(prev&&prev.status==='Pending'){setErr('fStatus','errStatus','Order must go through "In Progress" before Completed.');valid=false;}}
   if(!valid)return;
   const price=svcSelected.reduce((sum,s)=>sum+getServicePrice(s,vehicle),0);
-  const payload={customerName:name,plateNumber:plate,vehicleType:vehicle,slotId,service,total:price,status};
+  // New orders always start as Pending
+  const payload={customerName:name,plateNumber:plate,vehicleType:vehicle,slotId,service,total:price,status:'Pending'};
   try{if(editingOrderId){await apiFetch('update_order',{...payload,id:editingOrderId});toast('success','Order updated.');}else{await apiFetch('add_order',{...payload,source:'admin'});toast('success','Order added.');}closeModal('orderModal');await refreshAll();}catch(e){toast('error','Save failed: '+e.message);}
 }
 
