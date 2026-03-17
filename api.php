@@ -4,7 +4,7 @@
 // ────────────────────────────────────────────────────────────
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
-require_once _DIR_ . '/db.php';
+require_once __DIR__ . '/db.php';
 
 $action = $_REQUEST['action'] ?? '';
 
