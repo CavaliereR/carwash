@@ -723,7 +723,7 @@ table.orders-table{width:100%;border-collapse:collapse;}
 const API='api.php';
 async function apiFetch(action,data=null){
   const opts=data?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}:{method:'GET'};
-  const res=await fetch(${API}?action=${action},opts);
+  const res=await fetch(`${API}?action=${action}`,opts);
   if(!res.ok)throw new Error(await res.text());
   return res.json();
 }
@@ -842,6 +842,8 @@ function buildOrdersTable(list,mini){
   h+='</tr></thead><tbody>';
   list.forEach(o=>{
     const sc=statusCls(o.status);
+    let timeCell='<span style="color:var(--muted)">—</span>';
+    if(!mini){const p=[];if(o.startTime||o.start_time)p.push('<strong>Start:</strong> '+fmtTime(o.startTime||o.start_time));if(o.endTime||o.end_time)p.push('<strong>End:</strong> '+fmtTime(o.endTime||o.end_time));if(o.duration)p.push('<span class="dur-badge">⏱ '+esc(o.duration)+'</span>');if(p.length)timeCell='<div class="time-cell">'+p.join('<br>')+'</div>';}
     let actions='';
     if(!mini){
       if(o.status==='Pending'){actions='<button class="btn-done" onclick="quickComplete('+o.id+',\'In Progress\')">▶ Start</button><button class="btn btn-ghost btn-sm" onclick="openEditModal('+o.id+')">Edit</button><button class="btn btn-danger btn-sm" onclick="confirmDeleteOrder('+o.id+')">Delete</button>';}
